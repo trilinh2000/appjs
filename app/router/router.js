@@ -1,4 +1,5 @@
 const accountController = require('../controller/account.controller');
+const middleware=require('../middleware/middleware');
 module.exports=app =>{
     const express=require('express');
     const router=express.Router();
@@ -6,8 +7,8 @@ module.exports=app =>{
     .get('/',(req,res) =>{
         res.render('index');
     })
-    .get('/accounts',accountController.getAccounts)
-    .get('/create',accountController.showCreate)
-    .post('/create',accountController.createAccount)
+    .get('/accounts',middleware(accountController.getAccounts))
+    .get('/create',middleware(accountController.showCreate))
+    .post('/create',middleware(accountController.createAccount))
     app.use(router);
 }
