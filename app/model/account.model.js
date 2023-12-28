@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const product=require('./product');
 const accountSchema=new mongoose.Schema({
     username:{
         type:String,
@@ -20,6 +21,16 @@ const accountSchema=new mongoose.Schema({
     role:{
         type:String,
         default:"user",
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true,
+        ref:"product"
+    },
+    verify:{
+        type:Boolean,
+        default:"false"
     }
 },{
     connection:"account",
