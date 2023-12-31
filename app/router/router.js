@@ -4,6 +4,10 @@ const middleware=require('../middleware/middleware');
 const ErrorHandle=require('../middleware/error.handle');
 const accountMiddle=require('../middleware/account.middle');
 const productController=require('../controller/product.controller');
+const upload=require('../model/uploadfile.model')
+const bodyParser=require('body-parser');
+bodyParser.json();
+bodyParser.urlencoded({extended:false});
 module.exports=app =>{
     const express=require('express');
     const router=express.Router();
@@ -15,7 +19,7 @@ module.exports=app =>{
     .post('/home/login',middleware(accountController.login))
     .get('/home/logout',accountMiddle.loggedin,accountController.logout)
     .get('/home/product/create',accountMiddle.loggedin,middleware(productController.showFormCreateProduct))
-    .post('/home/product/create',accountMiddle.loggedin,middleware(productController.createProduct))
+    .post('/home/product/create',upload.single('image'),accountMiddle.loggedin,middleware(productController.createProduct))
     app.use(router);
     app.use(ErrorHandle);
 }

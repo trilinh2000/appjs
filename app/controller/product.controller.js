@@ -1,5 +1,11 @@
 const accountModel=require('../model/account.model');
 const productModel=require('../model/product');
+const fs=require('fs');
+const path=require('path');
+const bodyParser=require('body-parser');
+bodyParser.json();
+bodyParser.urlencoded({extended:false});
+ 
 
 module.exports.showFormCreateProduct=async(req,res,next) =>{
     
@@ -8,14 +14,26 @@ module.exports.showFormCreateProduct=async(req,res,next) =>{
     
 }
 module.exports.createProduct=async(req,res,next) =>{
-    const body={title:title,money:money}=req.body;
+    const {name,title,money}=req.body;
+    console.log({name,title,money});
     const account=req.session.account;
     const find=await accountModel.findOne(account)
-    if(!body){
+    const obj={
+        productId:find.id,
+        name:name,
+        title:title,
+        money:money,
+        img:{
+            data: fs.readFileSync(path.join('app/uploads/'+req.file.filename)),
+            contentType: 'image/jpg'
+    }
+}   
+    console.log(obj);
+    if(!obj){
         throw new Error("invalid not found")
     }
     else{
-        const createProduct=await productModel.create({productId:find.id,title:title,money:money});
+        const createProduct=await productModel.create(obj);
         if(createProduct.length===0){
             console.log('not create');
         }

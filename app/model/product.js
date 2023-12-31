@@ -5,11 +5,19 @@ const product= new mongoose.Schema({
         type:mongoose.Schema.ObjectId,
         ref:"account",
     },
+    name:{
+        type:String,
+        required:true,
+    },
     title:{
         type:String
     },
     money:{
         type:String
+    },
+    img:{
+        data: Buffer,
+        contentType: String
     }
 },{
     connection:"product",

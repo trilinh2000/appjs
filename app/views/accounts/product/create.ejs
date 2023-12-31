@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/home/product/create" method="post">
+    <form action="/home/product/create" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" id="name" placeholder="name">
         <input type="text" name="title" id="title" placeholder="title">
         <input type="text" name="money" id="money" placeholder="money">
+        <input type="file" name="image" id="image" placeholder="image">
         <input type="submit">
     </form>
 </body>
