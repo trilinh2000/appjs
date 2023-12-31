@@ -67,7 +67,7 @@ module.exports.logout=(req,res) =>{
         if(err){
             res.redirect('/500');
         }
-        res.redirect('accounts/login');
+        res.redirect('/home/login');
         console.log("Logout")
     })
 }

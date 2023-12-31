@@ -1,5 +1,10 @@
 const mongoose=require('mongoose');
+const account=require('./account.model')
 const product= new mongoose.Schema({
+    productId:{
+        type:String,
+        ref:"account",
+    },
     title:{
         type:String
     },

@@ -15,7 +15,7 @@ module.exports=app =>{
     .post('/home/login',middleware(accountController.login))
     .get('/home/logout',accountMiddle.loggedin,accountController.logout)
     .get('/home/product/create',accountMiddle.loggedin,middleware(productController.showFormCreateProduct))
-    // .post('/home/product/create',accountMiddle.loggedin,middleware(productController.createProduct))
+    .post('/home/product/create',accountMiddle.loggedin,middleware(productController.createProduct))
     app.use(router);
     app.use(ErrorHandle);
 }
