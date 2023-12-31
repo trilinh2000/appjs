@@ -30,7 +30,7 @@ const accountSchema=new mongoose.Schema({
     verify:{
         type:Boolean,
         default:"false"
-    }
+    },
 },{
     connection:"account",
     versionKey:false,

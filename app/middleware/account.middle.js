@@ -13,6 +13,6 @@ module.exports.loggedin=(req,res,next)=>{
         next();
     }
     else{
-        res.redirect('/home/logout');
+        res.redirect('/home/login');
     }
 }
