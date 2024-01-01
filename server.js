@@ -3,7 +3,6 @@ const app=express();
 const connectDB=require('./app/config/model');
 const session=require('express-session');
 const bodyParser=require('body-parser');
-require('dotenv/config')
 require('dotenv/config');
 app.set('view engine','ejs')
 app.set('views','app/views')

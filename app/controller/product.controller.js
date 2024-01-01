@@ -2,10 +2,7 @@ const accountModel=require('../model/account.model');
 const productModel=require('../model/product');
 const fs=require('fs');
 const path=require('path');
-const bodyParser=require('body-parser');
-bodyParser.json();
-bodyParser.urlencoded({extended:false});
- 
+
 
 module.exports.showFormCreateProduct=async(req,res,next) =>{
     

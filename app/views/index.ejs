@@ -6,18 +6,30 @@
     <title>Image Uploading</title>
   </head>
 <body>
-    hello <%=account.username%>
-    <form action="/home" enctype="multipart/form-data" ></form>
-    <h1>Uploaded Images</h1>
+  <div>
+    <%=account.username%>
+    <a href="/home/logout">Logout</a>
+  </div>
+  <div>
+    <a href="/home/product/create">Create product</a>
+  </div>
+    <h1>Home</h1>
     <div>
       <% items.forEach(function(image) { %>
+      <div>
+        <div>
           <img
-          src="accounts:image/<%=image.img.contentType%>;base64,
-          <%=image.img.data.toString('base64')%>"
-          /> 
+            src="data:image/<%=image.img.contentType%>;base64,
+                    <%=image.img.data.toString('base64')%>"
+          />
+          <div>
             <h5><%= image.name %></h5>
  
-            <p><%= image.desc %></p>
+            <p><%= image.title %></p>
+            <p><%= image.money %></p>
+          </div>
+        </div>
+      </div>
       <% }) %>
     </div>
 </body>

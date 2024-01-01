@@ -1,19 +1,18 @@
 const accountModel=require('../model/account.model')
 const productModel=require('../model/product');
-const bodyParser=require('body-parser');
-bodyParser.json();
-bodyParser.urlencoded({extended:true});
+const fs = require('fs');
+const path = require('path');
 module.exports.getAccounts=async(req,res)=>{
     /**
      * get account
      */
-    const accounts= await productModel.find();
-    res.render('index',{items:accounts});
+    const data= await productModel.find();
+    res.render('index',{items:data});
             // return res.status(200).json(accounts);
             
        }
-module.exports.send=async(req,res,next)=>{
+// module.exports.send=async(req,res,next)=>{
 
-        const accounts= await productModel.findOne().populate('productId');
-        // const accounts= await accountModel.find();
-}
+//         const accounts= await productModel.findOne().populate('productId');
+//         // const accounts= await accountModel.find();
+// }
