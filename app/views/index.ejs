@@ -5,32 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Uploading</title>
   </head>
+ <style type="text/css">
+    body {
+    margin: 0px;
+    }
+    #header {
+    background:blanchedalmond;
+    height: 100px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    }
+    #header ul,#header li{
+      padding: 0px;
+      margin: 0px;
+    }
+    #header li{
+      position: relative;
+      float: left;
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+    }
+    #header li a{
+      width: 100px;
+      height: 30px;
+      display: block;
+    }
+    #sidebar {
+    background: wheat;
+    height: 500px;
+    width: 20%;
+    float: left;
+    }
+    #main {
+    background-color: burlywood;
+    height: 500px;
+    width: 80%;
+    float: left;
+    }
+    #footer {
+    background: violet;
+    height: 100px;
+    width: 100%;
+    clear: both;
+    }
+ </style>
 <body>
-  <div>
-    <%=account.username%>
-    <a href="/home/logout">Logout</a>
+  <div id="header">
+    <ul>
+        <li>
+          <a href="/home">Home</a>
+        </li>
+        <li>
+          <a href="#">Document</a>
+        </li>
+        <li>
+          <a href="#">View</a>
+        </li>
+        <li>
+          <%=account.username%>
+          
+          <a href="/home/logout">Logout</a>
+        </li>
+    </ul>
   </div>
-  <div>
-    <a href="/home/product/create">Create product</a>
+  <div id ="sidebar">
+      sidebar
   </div>
-    <h1>Home</h1>
-    <div>
-      <% items.forEach(function(image) { %>
+  <div id="main"> 
+    <% items.forEach(function(image) { %>
       <div>
         <div>
           <img
             src="data:image/<%=image.img.contentType%>;base64,
                     <%=image.img.data.toString('base64')%>"
           />
-          <div>
             <h5><%= image.name %></h5>
- 
             <p><%= image.title %></p>
             <p><%= image.money %></p>
-          </div>
         </div>
       </div>
       <% }) %>
-    </div>
+  </div>
+  <div id="footer"> 
+    footer
+  </div>
+ 
 </body>
 </html>

@@ -2,6 +2,8 @@ const accountModel=require('../model/account.model');
 const ErrorHandle=require('../helpers/ErrorResponse');
 require('dotenv/config');
 const bcrypt=require('bcrypt');
+const mailer=require('../utils/mailer');
+const { findOneAndDelete } = require('../model/product');
 module.exports.showCreate=async(req,res,next)=>{
      res.render('accounts/create');
 }
@@ -23,10 +25,35 @@ module.exports.createAccount=async(req,res,next)=>{
             if(!newcreate){
                 throw new ErrorHandle(402,'Create error');
             }
-            res.redirect('/home/login')
+            else{
+                bcrypt.hash(newcreate.email,parseInt(process.env.BCRYPT_HASH)).then(async(hashEmail)=>{
+                    mailer.sendMail(newcreate.email,"Create Account",`<a href="${process.env.APP_URL}/home/verify?email=${newcreate.email}&token=${hashEmail}">Create Account</a>`);
+                    res.redirect('/home/login');
+                    setTimeout(async(req,res,next)=>{
+                        const xoa=await accountModel.findOneAndDelete({email:newcreate.email,verify:false});
+                        console.log("xoa:",xoa);
+                    },30000);
+                })
+            }
             })
             
         }
+    }
+}
+exports.verify=async(req,res,next) =>{
+    if(!req.query.email||!req.query.token){
+        res.render('accounts/create');
+    }
+    else{
+        bcrypt.compare(req.query.email,req.query.token,async(err,result)=>{
+            if(result==true){
+                const xacnhan=await accountModel.updateOne({email:req.query.email},{verify:true});
+                res.redirect('/home/login');
+            }
+            else{
+                res.redirect('/home/create');
+            }
+        })
     }
 }
 module.exports.showLogin=async(req,res,next)=>{
