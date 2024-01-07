@@ -32,6 +32,13 @@
       height: 30px;
       display: block;
     }
+    #header ul #logout{
+      display: block;
+      position: relative;
+      top: 30px;
+      left: 20px;
+      float: right;
+    }
     #sidebar {
     background: wheat;
     height: 500px;
@@ -63,11 +70,12 @@
         <li>
           <a href="#">View</a>
         </li>
-        <li>
+    </ul>
+    <ul>
+          <li id="logout">
           <%=account.username%>
-          
-          <a href="/home/logout">Logout</a>
-        </li>
+          <a href="/home/logout"><input type="submit" value="Logout"></a>
+          </li>
     </ul>
   </div>
   <div id ="sidebar">
