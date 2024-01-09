@@ -3,6 +3,7 @@ const account=require('./account.model')
 const product= new mongoose.Schema({
     productId:{
         type:mongoose.Schema.ObjectId,
+        required:true,
         ref:"account",
     },
     name:{
