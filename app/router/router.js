@@ -17,6 +17,7 @@ module.exports=app =>{
     const router=express.Router();
     router
     .get('/home',accountMiddle.loggedin,middleware(homeController.getAccounts))
+    .get('/home/delete',homeController.delete)
     .get('/home/create',accountMiddle.Login,middleware(accountController.showCreate))
     .post('/home/create',middleware(accountController.createAccount))
     .get('/home/verify',accountController.verify)
@@ -29,6 +30,7 @@ module.exports=app =>{
     .post('/home/password/reset/email',forgot.sendLink)
     .get('/home/password/reset/:email',forgot.showFormResetPass)
     .post('/home/password/reset',forgot.Reset)
+    
     app.use(router);
     app.use(ErrorHandle);
 }
